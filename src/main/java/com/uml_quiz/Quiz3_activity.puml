@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+start
+
+:open youtube;
+
+if(creator) then (yes)
+    :upload video;
+    :manage settings;
+
+else (no)
+    :Browse recommended videos;
+
+    if(catch attention) then (yes)
+        :clicks on one;
+    else (no)
+        repeat :search;
+        repeat while(catch attention?) is (no) not (yes)
+    endif
+
+    ->//merge//;
+
+    partition GiveFeedback{
+        :like;
+        :dislike;
+        :comment;
+        :sub;
+    }
+
+    partition Interactions{
+        :share;
+        :save;
+        :download;
+    }
+
+    :watch video;
+
+endif
+end
+
+@enduml
